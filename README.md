@@ -1,9 +1,5 @@
-Below is a complete, professional `README.md` in English that explains your webapp in detail:
-
----
-
-
 # Real Visits Simulator (PHP Proxy + iFrame)
+#### Author: Bocaletto Luca
 
 This project is a PHP-based web application developed by **Bocaletto Luca** (GitHub: `bocaletto-luca`) that simulates real page visits. It uses a reverse proxy to load a target URL inside an `<iframe>`, generating simulated traffic that appears as a full page load.
 
