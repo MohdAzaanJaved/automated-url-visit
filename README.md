@@ -1,4 +1,5 @@
 # Simulatore di Visite Reali
+#### Author: Bocaletto Luca
 
 Questo progetto, sviluppato da **Bocaletto Luca** (account GitHub: `bocaletto-luca`), è una webapp PHP che simula pagine web visitate in modalità reali. La simulazione viene effettuata tramite un reverse proxy integrato che carica l'URL target in un `<iframe>`, fornendo una simulazione di traffico "reale".
 
