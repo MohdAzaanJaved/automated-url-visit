@@ -1,90 +1,108 @@
-# Simulatore di Visite Reali
-#### Author: Bocaletto Luca
+Below is a complete, professional `README.md` in English that explains your webapp in detail:
 
-Questo progetto, sviluppato da **Bocaletto Luca** (account GitHub: `bocaletto-luca`), è una webapp PHP che simula pagine web visitate in modalità reali. La simulazione viene effettuata tramite un reverse proxy integrato che carica l'URL target in un `<iframe>`, fornendo una simulazione di traffico "reale".
+---
 
-## Caratteristiche
 
-- **Reverse Proxy Integrato:** Utilizza un parametro GET (`?proxy=1&url=...`) per recuperare il contenuto di un URL specifico.  
-  - Valida l'URL e utilizza cURL per effettuare la richiesta.
-  - Rimuove eventuali meta tag `Content-Security-Policy` dal contenuto HTML per evitare restrizioni.
-- **Interfaccia Utente:** 
-  - Form per specificare l'URL target, l'intervallo in secondi tra le ricariche e il numero di visite da simulare.
-  - Log in tempo reale che mostra le ricariche effettuate.
-  - Pulsanti per avviare, mettere in pausa e fermare la simulazione.
-- **Interazione dinamica:**  
-  - L'`<iframe>` viene creato dinamicamente e carica l'URL target sempre tramite il proxy, consentendo un aggiornamento continuo della pagina target.
-  - La simulazione gestisce stati di pausa/ripresa e consente l'interruzione manuale tramite l'interfaccia.
+# Real Visits Simulator (PHP Proxy + iFrame)
 
-## Come Funziona
+This project is a PHP-based web application developed by **Bocaletto Luca** (GitHub: `bocaletto-luca`) that simulates real page visits. It uses a reverse proxy to load a target URL inside an `<iframe>`, generating simulated traffic that appears as a full page load.
 
-1. **Richiesta Proxy:**  
-   Se il parametro `proxy=1` e `url` sono presenti nella query string, lo script PHP agisce come proxy:
-   - Verifica la validità dell'URL.
-   - Effettua una richiesta cURL per recuperare il contenuto della pagina target.
-   - Rimuove eventuali meta tag CSP per evitare restrizioni.
-   - Restituisce il contenuto HTML con l'intestazione corretta.
+## Overview
 
-2. **Interfaccia della Simulazione:**  
-   - L'utente inserisce l'URL target, l'intervallo delle ricariche (in secondi) e il numero di visite da simulare.
-   - Viene creato un `<iframe>` che carica l'URL target tramite il reverse proxy.
-   - Un contatore monitora le ricariche e, ad ogni aggiornamento, viene registrata una nuova "visita" nel log.
-   - Funzionalità per mettere in pausa, riprendere o fermare la simulazione.
+The Real Visits Simulator is designed to mimic genuine user visits by reloading a target URL at defined intervals. The proxy functionality is built directly into the PHP script, making it easy to deploy and use without additional components. This solution can be utilized for testing, demonstration purposes, or exploring load behaviors, always with a commitment to responsible use.
 
-## Prerequisiti
+## Features
 
-- **PHP:** Assicurarsi di avere una versione di PHP installata sul proprio server.
-- **cURL:** L'estensione cURL deve essere abilitata in PHP.
-- **Internet:** La webapp utilizza Bootstrap tramite CDN per lo styling e il bundle JavaScript.
+- **Integrated Reverse Proxy:**  
+  - Activates when the URL is appended with `?proxy=1&url=...`.  
+  - Validates the supplied URL and uses cURL to fetch the target page's content.  
+  - Strips out any `Content-Security-Policy` meta tags from the HTML to avoid undesired restrictions.
 
-## Installazione
+- **User-Friendly Interface:**  
+  - A clean Bootstrap-based layout allows users to specify the target URL, the interval (in seconds) between refreshes, and the total number of simulated visits.
+  - A real-time log panel is provided to display visit activity with timestamps.
+  - Dedicated buttons to start, pause/resume, and stop the simulation, giving complete control to the user.
 
-1. **Clona il Repository**
+- **Dynamic Page Loading:**  
+  - The webapp dynamically creates an `<iframe>` that re-loads the external page via the proxy script.
+  - Every refresh is counted as a new visit, with the current progress displayed in the log.
+
+## How It Works
+
+1. **Proxy Handling:**  
+   When accessing the script with the `proxy=1` parameter and a valid `url`, the PHP code:
+   - Checks the URL's validity.
+   - Uses cURL to retrieve the content from the target website.
+   - Removes any problematic CSP directives embedded in the HTML.
+   - Returns the sanitized content with the appropriate content type.
+
+2. **Simulation Process:**  
+   - The provided form collects three parameters: the target URL, the refresh interval (in seconds), and the number of simulated visits.
+   - Once the simulation starts, an `<iframe>` is generated and loads the target URL through the proxy.
+   - A JavaScript timer controls the refresh cycle based on user input and updates the log on each simulated visit.
+   - Controls allow users to pause/resume or completely abort the process.
+
+## Prerequisites
+
+- **PHP:** Ensure your server is running an appropriate version of PHP.
+- **cURL:** The PHP cURL extension must be enabled.
+- **Internet Access:** The application leverages Bootstrap via a CDN for styling and JavaScript functionalities.
+
+## Installation
+
+1. **Clone the Repository:**
 
    ```bash
-   git clone https://github.com/bocaletto-luca/nome-del-repository.git
-   cd nome-del-repository
+   git clone https://github.com/bocaletto-luca/your-repository-name.git
+   cd your-repository-name
    ```
 
-2. **Configurazione del Server**
+2. **Server Configuration:**
 
-   - Copia i file sul tuo server web con supporto PHP.
-   - Assicurati che l'estensione cURL sia attiva.
+   - Upload the files to your PHP-enabled web server.
+   - Ensure that the cURL extension is active in your PHP configuration.
 
-3. **Accesso alla Webapp**
+3. **Access the Application:**
 
-   - Accedi al file tramite browser, ad esempio: `http://tuo-dominio.com/path/to/index.php`.
+   Open your browser and navigate to the hosted file (e.g., `http://your-domain.com/path/to/index.php`).
 
-## Utilizzo
+## Usage
 
-1. **Inserisci l'URL:** Digita l’URL della pagina da caricare (es. `https://esempio.com`).
-2. **Intervallo:** Imposta il numero di secondi tra le ricariche.
-3. **Numero di Visite:** Specifica il numero totale di visite da simulare.
-4. **Controlli:**  
-   - Clicca su **Avvia** per iniziare la simulazione.
-   - Utilizza **Metti in pausa** per sospendere temporaneamente la simulazione e **Riprendi** per continuare.
-   - Il pulsante **Ferma** interrompe completamente il processo e rimuove l'`<iframe>`.
+1. **Enter the Target URL:**  
+   Provide the URL that you wish to simulate visits for (for example, `https://example.com`).
 
-## Struttura del Codice
+2. **Set the Refresh Interval:**  
+   Input the interval in seconds between each reload.
 
-- **Sezione PHP Iniziale:**  
-  Gestisce il comportamento del reverse proxy controllando i parametri GET `proxy` e `url`. Utilizza cURL per effettuare la richiesta e processa il documento HTML (rimuovendo meta tag CSP).
+3. **Define the Number of Visits:**  
+   Specify the total number of simulated visits.
 
-- **Interfaccia HTML e CSS:**  
-  Utilizza Bootstrap per lo styling con alcune regole CSS personalizzate per il layout del log e dell'`<iframe>`.
+4. **Control the Simulation:**  
+   - Click **Start** to begin the simulation process.
+   - Use **Pause** to temporarily halt the refresh cycle. The button will toggle to **Resume** when paused.
+   - Click **Stop** to completely terminate the simulation and remove the generated `<iframe>`.
 
-- **Logica JavaScript:**  
-  - Gestisce le operazioni temporizzate per simulare le visite.
-  - Aggiorna dinamicamente il log con l'orario e lo stato delle ricariche.
-  - Permette azioni di pausa, ripresa e interruzione della simulazione.
+## Code Structure
 
-## Contributi
+- **PHP Proxy Section:**  
+  Located at the beginning of the script, this section handles the proxy logic. It validates the URL, performs the cURL request to fetch the target page, strips out unnecessary CSP meta tags, and serves the content with the correct headers.
 
-Se intendi contribuire, puoi inviare un pull request o aprire una issue sul repository GitHub.
+- **HTML & CSS Interface:**  
+  The frontend is built using Bootstrap. Custom CSS is included to style the logging area and the container that holds the dynamically created `<iframe>`.
 
-## Avvertenze
+- **JavaScript Logic:**  
+  JavaScript handles the simulation by:
+  - Capturing user input from the form.
+  - Dynamically creating and controlling the `<iframe>` element.
+  - Logging the progress of each visit and managing the pause/resume and stop functionalities.
 
-- **Uso Responsabile:**  
-  Utilizza questa webapp responsabilmente, rispettando le politiche dei siti target. La simulazione di visite non autorizzate su siti web di terzi può violare i termini di servizio.
+## Contributing
+
+Contributions are welcome! If you have any suggestions or would like to enhance the functionality of the simulator, please feel free to open an issue or submit a pull request via GitHub.
+
+## Disclaimer
+
+- **Responsible Use:**  
+  This webapp is intended for testing, demonstration, and educational purposes only. Misuse of this tool to generate unauthorized traffic can violate the terms of service of external websites. Please ensure that you use this tool responsibly and in accordance with applicable laws and regulations.
 
 ---
