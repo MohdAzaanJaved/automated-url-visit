@@ -1,2 +1,5 @@
 # automated-url-visit
-automated-url-visit website page visit auto
+#### Author: Bocaletto Luca
+#### License: GPL v3
+
+automated-url-visit  website page visit. automation, auto click url page visit.
